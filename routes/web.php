@@ -29,8 +29,8 @@ Route::get('/todo', [TodosController::class, 'index'])->name('todo');
 Route::get('/todo/{id}', [TodosController::class, 'show'])->name('todo-show');
 Route::patch('/todo/{id}', [TodosController::class, 'update'])->name('todo-update');
 
-Route::delete('/todo', [TodosController::class, 'destroy'])->name('todo-destroy');
+Route::delete('/todo/{id}', [TodosController::class, 'destroy'])->name('todo-destroy');
 
-Route::get('/hola', function () {
+Route::get('/*', function () {
     return response()->view('errors.404', [], 404);
 });

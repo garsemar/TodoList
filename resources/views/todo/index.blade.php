@@ -25,7 +25,7 @@
                         <a href="{{ route('todo-show', ['id' => $i->id]) }}">{{ $i -> title }}</a>
                     </div>
                     <div class="col-md-3 d-flex justify-content-end">
-                        <form action="{{ route('todo-destroy', [$i->id]) }}" method="POST">
+                        <form action="{{ route('todo-destroy', ['id' => $i->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>

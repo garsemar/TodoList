@@ -11,13 +11,13 @@ class todosController extends Controller
         $request->validate([
             'title' => 'required|min:3'
         ]);
-        
+
         $todo = new todo();
 
         $todo->title = $request->title;
         $todo->save();
 
-        return redirect()->route('todo')->with('success', 'Tarea creada');
+        return redirect()->route('todo')->with('success', 'Tarea creada!');
     }
 
     public function index(){
@@ -25,26 +25,27 @@ class todosController extends Controller
 
         return view('todo.index', ['todo' => $todo]);
     }
-    
+
     public function show($id){
-        
+
         $todo = todo::find($id);
 
         return view('todo.show', ['todo' => $todo]);
     }
-    
+
     public function update(Request $request, $id){
         $todo = todo::find($id);
         $todo->title = $request->title;
 
-        dd($todo);
+        $todo->save();
 
-        return view('todo.index', ['todo' => $todo]);
+        return redirect()->route('todo')->with('success', 'Tarea actualizada!');
     }
 
-    public function destroy(){
-        $todo = todo::all();
+    public function destroy($id){
+        $todo = todo::find($id);
+        $todo->delete();
 
-        return view('todo.index', ['todo' => $todo]);
+        return redirect()->route('todo')->with('success', 'Tarea eliminada!');
     }
 }
